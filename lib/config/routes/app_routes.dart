@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:walleti/features/template/presentation/pages/template_page.dart';
+
+import '../../features/settings/presentation/views.dart';
+import '../../features/wellcome/presentation/pages/wellcome_page.dart';
+import 'routes.dart';
 
 class AppRoutes {
   static Route onGenerateRoutes(RouteSettings settings) {
     switch (settings.name) {
-      case TemplatePage.routeName:
-        return _materialRoute(const TemplatePage());
+      case Routes.wellcome:
+        return _materialRoute(const WellcomePage());
+      case Routes.settings:
+        return _materialRoute(const SettingsPage());
 
       default:
-        return _materialRoute(const TemplatePage());
+        return _materialRoute(const WellcomePage());
     }
   }
 

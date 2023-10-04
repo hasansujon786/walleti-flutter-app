@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'config/routes/app_routes.dart';
 import 'config/theme/app_theme.dart';
-import 'features/template/presentation/pages/template_page.dart';
+import 'features/wellcome/presentation/pages/wellcome_page.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -13,7 +13,7 @@ class App extends StatelessWidget {
       title: 'Material App',
       restorationScopeId: 'app',
       theme: theme(),
-      home: const TemplatePage(),
+      home: const WellcomePage(),
       onGenerateRoute: AppRoutes.onGenerateRoutes,
     );
   }
