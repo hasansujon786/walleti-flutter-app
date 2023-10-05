@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'config/routes/app_routes.dart';
-import 'config/theme/app_theme.dart';
-import 'features/wellcome/presentation/pages/wellcome_page.dart';
+import 'routes/app_routes.dart';
+import 'shared/theme/app_theme.dart';
+import 'shared/theme/app_theme_provider.dart';
 
-class App extends StatelessWidget {
+class App extends ConsumerWidget {
   const App({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ref) {
+    final appThemeMode = ref.watch(appThemeProvider);
     return MaterialApp(
       title: 'Material App',
       restorationScopeId: 'app',
-      theme: theme(),
-      home: const WellcomePage(),
+      themeMode: appThemeMode,
+      theme: AppTheme.lightTheme,
+      darkTheme: AppTheme.darkTheme,
       onGenerateRoute: AppRoutes.onGenerateRoutes,
     );
   }

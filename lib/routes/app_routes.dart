@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../features/settings/presentation/views.dart';
-import '../../features/wellcome/presentation/pages/wellcome_page.dart';
+import '../features/settings/presentation/pages/settings_page.dart';
+import '../features/wellcome/presentation/pages/wellcome_page.dart';
 import 'routes.dart';
 
 class AppRoutes {

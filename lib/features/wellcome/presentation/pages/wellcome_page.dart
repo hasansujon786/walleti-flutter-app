@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:walleti/config/routes/routes.dart';
+
+import '../../../../routes/routes.dart';
 
 class WellcomePage extends StatelessWidget {
   const WellcomePage({super.key});
