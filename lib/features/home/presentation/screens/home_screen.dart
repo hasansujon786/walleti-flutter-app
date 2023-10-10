@@ -27,10 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          showModalBottomSheet<void>(
-            context: context,
-            builder: (BuildContext context) => const TransactionForm(),
-          );
+          showTransactionForm(context);
         },
         child: const Icon(Icons.add),
       ),
