@@ -13,11 +13,12 @@ class App extends ConsumerWidget {
     final appThemeMode = ref.watch(appThemeProvider);
     return MaterialApp(
       title: 'Material App',
-      restorationScopeId: 'app',
       themeMode: appThemeMode,
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
+      restorationScopeId: 'app',
       onGenerateRoute: AppRoutes.onGenerateRoutes,
+      debugShowCheckedModeBanner: false,
     );
   }
 }

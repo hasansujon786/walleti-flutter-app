@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 
-import '../features/settings/presentation/pages/settings_page.dart';
-import '../features/wellcome/presentation/pages/wellcome_page.dart';
+import '../features/settings/presentation/screens/settings_screen.dart';
+import '../features/home/presentation/screens/home_screen.dart';
 import 'routes.dart';
 
 class AppRoutes {
   static Route onGenerateRoutes(RouteSettings settings) {
     switch (settings.name) {
-      case Routes.wellcome:
-        return _materialRoute(const WellcomePage());
+      case Routes.home:
+        return _materialRoute(const HomeScreen());
       case Routes.settings:
-        return _materialRoute(const SettingsPage());
+        return _materialRoute(const SettingsScreen());
 
       default:
-        return _materialRoute(const WellcomePage());
+        return _materialRoute(const HomeScreen());
     }
   }
 

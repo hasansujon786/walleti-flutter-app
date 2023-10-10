@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../../../routes/routes.dart';
 
-class WellcomePage extends StatelessWidget {
-  const WellcomePage({super.key});
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
