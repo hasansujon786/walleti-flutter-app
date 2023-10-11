@@ -1,20 +1,41 @@
 class Transaction {
   Transaction({
-    required this.title,
     required this.amount,
     required this.type,
+    this.category,
+    this.note,
   });
 
-  String title;
   double amount;
   TransactionType type;
+  String? category;
+  String? note;
 
-  Transaction copyWith({String? title, double? amount}) {
+  Transaction copyWith({
+    double? amount,
+    String? category,
+    TransactionType? type,
+    String? note,
+  }) {
     return Transaction(
-      title: title ?? this.title,
       amount: amount ?? this.amount,
-      type: type,
+      type: type ?? this.type,
+      category: category ?? this.category,
+      note: note ?? this.note,
     );
+  }
+
+  @override
+  String toString() {
+    return 'amount $amount, type $type, category $category, note $note';
+  }
+
+  static bool isExpanseType(TransactionType cType) {
+    return cType == TransactionType.expance;
+  }
+
+  static bool isIncomeType(TransactionType cType) {
+    return cType == TransactionType.income;
   }
 }
 

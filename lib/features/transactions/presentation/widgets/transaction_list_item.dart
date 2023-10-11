@@ -10,7 +10,7 @@ class TransactionListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      title: Text(tnx.title),
+      title: Text(tnx.category ?? 'Unknown'),
       trailing: Text('${tnx.type == TransactionType.income ? '+' : '-'} ${tnx.amount}'),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8.0),
