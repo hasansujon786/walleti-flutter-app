@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../shared/theme/app_colors.dart';
 import '../../domain/entities/transaction.dart';
 import '../providers/template_provider.dart';
 import 'transaction_category_list.dart';
 import 'transaction_category_tile.dart';
-import 'transaction_type_switch.dart';
+import 'transaction_form_toolbar.dart';
 
 showTransactionForm(BuildContext context) {
   showModalBottomSheet<void>(
@@ -18,6 +19,9 @@ showTransactionForm(BuildContext context) {
   );
 }
 
+const btnText = AppColors.darkGreen;
+const btnOutline = AppColors.extraLightGrey;
+
 class TransactionForm extends StatefulWidget {
   const TransactionForm({super.key});
 
@@ -29,6 +33,7 @@ class _TransactionFormState extends State<TransactionForm> {
   var _isSaveBtnDisablled = true;
   var _isNoteInputVisibled = false;
   var _isCategoryListVisibled = false;
+  final _keyboardPadding = 0;
 
   // transaction input value
   late TextEditingController _amountController;
@@ -57,6 +62,10 @@ class _TransactionFormState extends State<TransactionForm> {
     _amountController.dispose();
     _noteController.dispose();
     super.dispose();
+  }
+
+  void _toggleNote() {
+    setState(() => _isNoteInputVisibled = !_isNoteInputVisibled);
   }
 
   void _handleOnSave(BuildContext context, WidgetRef ref) {
@@ -92,11 +101,17 @@ class _TransactionFormState extends State<TransactionForm> {
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                TransactionCategoryTile(
-                  category: _choosenCategory ?? 'U',
-                  onSelect: (_) {
-                    setState(() => _isCategoryListVisibled = true);
-                  },
+                Column(
+                  children: [
+                    TransactionCategoryTile(
+                      category: _choosenCategory ?? 'U',
+                      onSelect: (_) {
+                        setState(() => _isCategoryListVisibled = true);
+                      },
+                    ),
+                    const SizedBox(height: 4),
+                    const Text('Expanse')
+                  ],
                 ),
                 const SizedBox(width: 12),
                 _buildInputAmount(),
@@ -104,35 +119,15 @@ class _TransactionFormState extends State<TransactionForm> {
             ),
             if (_isNoteInputVisibled) _buildNoteInput(),
             const SizedBox(height: 12),
-            _buildToolBar(),
+            TransactionFormToolBar(
+              onSave: _handleOnSave,
+              toggleNote: _toggleNote,
+              isSaveBtnDisablled: _isSaveBtnDisablled,
+            ),
             const SizedBox(height: 16),
           ],
         ),
       ),
-    );
-  }
-
-  Row _buildToolBar() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        IconButton(
-          onPressed: () {
-            setState(() => _isNoteInputVisibled = !_isNoteInputVisibled);
-          },
-          icon: const Icon(Icons.note_add_outlined),
-        ),
-        const SizedBox(width: 12),
-        TransactionTypeSwitch(
-          selectedType: _choosenTransactinType,
-          onValueChange: (value) {
-            setState(() => _choosenTransactinType = value);
-          },
-        ),
-        const Spacer(),
-        _buildSaveBtn(),
-        // _buildCreateBtn(),
-      ],
     );
   }
 
@@ -161,24 +156,6 @@ class _TransactionFormState extends State<TransactionForm> {
           ),
         ),
       ),
-    );
-  }
-
-  Consumer _buildSaveBtn() {
-    final theme = Theme.of(context);
-    return Consumer(
-      builder: (context, ref, child) {
-        return TextButton(
-          onPressed: _isSaveBtnDisablled ? null : () => _handleOnSave(context, ref),
-          child: Text(
-            'Save',
-            style: TextStyle(
-              fontSize: 16,
-              color: _isSaveBtnDisablled ? Colors.grey.shade500 : theme.primaryColor,
-            ),
-          ),
-        );
-      },
     );
   }
 }
