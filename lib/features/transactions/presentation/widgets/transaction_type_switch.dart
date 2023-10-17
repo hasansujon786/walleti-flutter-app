@@ -1,61 +1,76 @@
 import 'package:flutter/material.dart';
-import 'package:walleti/features/transactions/domain/entities/transaction.dart';
 
-class TransactionTypeSwitch extends StatelessWidget {
-  const TransactionTypeSwitch({
-    super.key,
-    this.selectedType = TransactionType.expance,
-    this.onValueChange,
-  });
+import '../../../../shared/theme/app_colors.dart';
 
-  final TransactionType selectedType;
-  final void Function(TransactionType)? onValueChange;
+const _wrapperWidth = 200.0;
+const _swWidth = _wrapperWidth / 2;
 
-  void emmitIncome() {
-    onValueChange?.call(TransactionType.income);
+class TransactionTypeSwitch extends StatefulWidget {
+  const TransactionTypeSwitch({super.key, required this.controller});
+
+  final PageController controller;
+
+  @override
+  State<TransactionTypeSwitch> createState() => _TransactionTypeSwitchState();
+}
+
+class _TransactionTypeSwitchState extends State<TransactionTypeSwitch> {
+  late double curPage = widget.controller.initialPage.toDouble();
+
+  void changePage() {
+    if (curPage == 1) {
+      widget.controller.previousPage(duration: const Duration(milliseconds: 350), curve: Curves.easeOut);
+    } else {
+      widget.controller.nextPage(duration: const Duration(milliseconds: 350), curve: Curves.easeOut);
+    }
   }
 
-  void emmitExpanse() {
-    onValueChange?.call(TransactionType.expance);
+  @override
+  void initState() {
+    super.initState();
+    widget.controller.addListener(() {
+      curPage = widget.controller.page ?? 1;
+      setState(() {});
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    final isExpanseType = Transaction.isExpanseType(selectedType);
-    final primaryColor = Theme.of(context).primaryColor;
-    final disableColor = Colors.grey.shade500;
-    return Stack(
-      clipBehavior: Clip.none,
-      children: [
-        Positioned(
-          right: selectedType == TransactionType.expance ? null : 0,
-          bottom: 5,
-          child: Container(
-            width: 48,
-            height: 2,
-            color: primaryColor,
+    return SizedBox(
+      width: _wrapperWidth,
+      child: Stack(
+        clipBehavior: Clip.none,
+        children: [
+          Positioned(
+            left: curPage * _swWidth,
+            bottom: 5,
+            child: Container(width: _swWidth, height: 2, color: Theme.of(context).primaryColor),
           ),
+          Row(
+            children: [
+              buildSwitch('Expanse', curPage < 1),
+              buildSwitch('Income', curPage > 0),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  TextButton buildSwitch(String text, bool isActiveSW) {
+    const disableColor = AppColors.grey;
+    final primaryColor = Theme.of(context).primaryColor;
+
+    return TextButton(
+      onPressed: isActiveSW ? null : changePage,
+      style: const ButtonStyle(minimumSize: MaterialStatePropertyAll(Size(_swWidth, 48))),
+      child: Text(
+        text,
+        style: TextStyle(
+          color: isActiveSW ? primaryColor : disableColor,
+          fontSize: 18,
         ),
-        Row(
-          children: [
-            TextButton(
-              onPressed: !isExpanseType ? emmitExpanse : null,
-              child: Text(
-                'Expanse',
-                style: TextStyle(color: isExpanseType ? primaryColor : disableColor),
-              ),
-            ),
-            const SizedBox(width: 4),
-            TextButton(
-              onPressed: isExpanseType ? emmitIncome : null,
-              child: Text(
-                'Income',
-                style: TextStyle(color: !isExpanseType ? primaryColor : disableColor),
-              ),
-            ),
-          ],
-        ),
-      ],
+      ),
     );
   }
 }

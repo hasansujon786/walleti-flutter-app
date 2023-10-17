@@ -10,14 +10,14 @@ class TransactionCategoryTile extends StatelessWidget {
   final String category;
   final void Function(String)? onSelect;
 
-  void emmitOnSelect() {
+  void emmitTxnCategoryOnSelect() {
     onSelect?.call(category);
   }
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: emmitOnSelect,
+      onTap: emmitTxnCategoryOnSelect,
       borderRadius: BorderRadius.circular(8.0),
       child: Ink(
         height: 64,

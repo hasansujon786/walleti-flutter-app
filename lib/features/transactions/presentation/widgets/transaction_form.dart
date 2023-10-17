@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../shared/theme/app_colors.dart';
 import '../../domain/entities/transaction.dart';
 import '../providers/template_provider.dart';
-import 'transaction_category_list.dart';
+import 'tnx_category_pikcer.dart';
 import 'transaction_category_tile.dart';
 import 'transaction_form_toolbar.dart';
 
@@ -32,8 +32,7 @@ class TransactionForm extends StatefulWidget {
 class _TransactionFormState extends State<TransactionForm> {
   var _isSaveBtnDisablled = true;
   var _isNoteInputVisibled = false;
-  var _isCategoryListVisibled = false;
-  final _keyboardPadding = 0;
+  var _isCategoryListVisibled = true;
 
   // transaction input value
   late TextEditingController _amountController;
@@ -79,9 +78,10 @@ class _TransactionFormState extends State<TransactionForm> {
     Navigator.pop(context);
   }
 
-  void _handleOnCategorySelect(value) {
+  void _handleOnCategorySelect(String value, TransactionType type) {
     setState(() {
       _choosenCategory = value;
+      _choosenTransactinType = type;
       _isCategoryListVisibled = false;
     });
   }
@@ -89,7 +89,10 @@ class _TransactionFormState extends State<TransactionForm> {
   @override
   Widget build(BuildContext context) {
     if (_isCategoryListVisibled) {
-      return TransactionCategoryList(onSelect: _handleOnCategorySelect);
+      return TnxCategoryPikcer(
+        onSelect: _handleOnCategorySelect,
+        initialTnxType: _choosenTransactinType,
+      );
     }
 
     return SingleChildScrollView(
@@ -110,7 +113,7 @@ class _TransactionFormState extends State<TransactionForm> {
                       },
                     ),
                     const SizedBox(height: 4),
-                    const Text('Expanse')
+                    Text(Transaction.isExpanseType(_choosenTransactinType) ? 'Expanse' : 'Income')
                   ],
                 ),
                 const SizedBox(width: 12),

@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:walleti/features/transactions/domain/entities/transaction.dart';
+
+import '../../domain/entities/transaction.dart';
 
 final transactionsProvider = StateNotifierProvider<TransactionsStateNotifier, List<Transaction>>((ref) {
   final  items = <Transaction>[];
