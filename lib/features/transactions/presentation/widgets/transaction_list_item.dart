@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../shared/extensions/date_time_extention.dart';
 import '../../../../shared/theme/app_colors.dart';
 import '../../domain/entities/transaction.dart';
 
@@ -13,7 +14,13 @@ class TransactionListItem extends StatelessWidget {
     final isExpanse = Transaction.isExpanseType(tnx.type);
 
     return ListTile(
-      title: Text(tnx.category ?? 'Unknown'),
+      title: Row(
+        children: [
+          Text(tnx.category ?? 'Unknown'),
+          const SizedBox(width: 8),
+          Text(tnx.createdAt.relateiveDate),
+        ],
+      ),
       trailing: Text(
         '${isExpanse ? '-' : '+'} ${tnx.amount}',
         style: TextStyle(

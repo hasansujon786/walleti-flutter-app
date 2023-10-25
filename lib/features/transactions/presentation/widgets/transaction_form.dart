@@ -38,6 +38,7 @@ class _TransactionFormState extends State<TransactionForm> {
   late TextEditingController _amountController;
   late TextEditingController _noteController;
   var _choosenTransactinType = TransactionType.expance;
+  var _choosenDate = DateTime.now();
   String? _choosenCategory;
 
   @override
@@ -73,6 +74,7 @@ class _TransactionFormState extends State<TransactionForm> {
       type: _choosenTransactinType,
       category: _choosenCategory,
       note: _isNoteInputVisibled && _noteController.text.isNotEmpty ? _noteController.text : null,
+      createdAt: _choosenDate,
     );
     ref.read(transactionsProvider.notifier).create(tnx);
     Navigator.pop(context);
@@ -126,6 +128,11 @@ class _TransactionFormState extends State<TransactionForm> {
               onSave: _handleOnSave,
               toggleNote: _toggleNote,
               isSaveBtnDisablled: _isSaveBtnDisablled,
+              onSelectNewDate: (newDate) {
+                if (newDate != null) {
+                  _choosenDate = newDate;
+                }
+              },
             ),
             const SizedBox(height: 16),
           ],
