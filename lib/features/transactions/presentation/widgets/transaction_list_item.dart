@@ -29,10 +29,6 @@ class TransactionListItem extends StatelessWidget {
           color: isExpanse ? AppColors.expanse : AppColors.income,
         ),
       ),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8.0),
-        side: BorderSide(width: 1, color: Colors.grey.shade200),
-      ),
       tileColor: Colors.white,
     );
   }

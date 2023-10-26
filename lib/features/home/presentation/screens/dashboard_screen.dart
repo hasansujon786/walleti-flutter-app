@@ -1,22 +1,46 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../transactions/presentation/providers/template_provider.dart';
-import '../../../transactions/presentation/widgets/transaction_list_item.dart';
+import '../widgets/widgets.dart';
 
-class DashboardScreen extends ConsumerWidget {
+final _bg = Colors.grey.shade100;
+
+class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});
 
+  void onTnxViewToggle(bool b) {}
+
   @override
-  Widget build(BuildContext context, ref) {
-    final tnxs = ref.watch(transactionsProvider);
-    return ListView.separated(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
-      itemBuilder: (context, index) {
-        return TransactionListItem(tnxs[index]);
-      },
-      separatorBuilder: (context, i) => const SizedBox(height: 8),
-      itemCount: tnxs.length,
+  Widget build(BuildContext context) {
+    return CustomScrollView(
+      slivers: <Widget>[
+        const _DbAppBar(),
+        DbTtransactionListHeader(
+          bg: _bg,
+          isTransactionsView: true,
+          toggleTransactioView: onTnxViewToggle,
+        ),
+        const DbTransactionListView(),
+        const SliverPadding(padding: EdgeInsets.only(bottom: 40))
+      ],
+    );
+  }
+}
+
+class _DbAppBar extends StatelessWidget {
+  const _DbAppBar();
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverAppBar(
+      titleSpacing: 12,
+      centerTitle: true,
+      leadingWidth: 46,
+      // title: const Text('sdf', style: TextStyle(fontSize: 16)),
+      expandedHeight: 300,
+      pinned: true,
+      stretch: true,
+      backgroundColor: Colors.teal,
+      flexibleSpace: AccountCardHeader(bg: _bg),
     );
   }
 }

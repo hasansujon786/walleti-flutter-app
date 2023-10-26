@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../../routes/routes.dart';
 import '../../../transactions/presentation/widgets/widgets.dart';
 import 'dashboard_screen.dart';
 
@@ -16,15 +15,15 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Home Page'),
-        actions: [
-          IconButton(
-            onPressed: () => Navigator.pushNamed(context, Routes.settings),
-            icon: const Icon(Icons.settings),
-          )
-        ],
-      ),
+      // appBar: AppBar(
+      //   title: const Text('Home Page'),
+      //   actions: [
+      //     IconButton(
+      //       onPressed: () => Navigator.pushNamed(context, Routes.settings),
+      //       icon: const Icon(Icons.settings),
+      //     )
+      //   ],
+      // ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           showTransactionForm(context);

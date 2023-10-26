@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../shared/theme/app_colors.dart';
 import '../../domain/entities/transaction.dart';
-import '../providers/template_provider.dart';
+import '../providers/providers.dart';
 import 'tnx_category_pikcer.dart';
 import 'transaction_category_tile.dart';
 import 'transaction_form_toolbar.dart';
