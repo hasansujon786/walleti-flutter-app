@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../shared/theme/app_colors.dart';
 import '../../domain/entities/transaction.dart';
 import '../providers/providers.dart';
-import 'tnx_category_pikcer.dart';
-import 'transaction_category_tile.dart';
-import 'transaction_form_toolbar.dart';
+import 'widgets.dart';
 
 showTransactionForm(BuildContext context) {
   showModalBottomSheet<void>(
@@ -19,8 +16,6 @@ showTransactionForm(BuildContext context) {
   );
 }
 
-const btnText = AppColors.darkGreen;
-const btnOutline = AppColors.extraLightGrey;
 
 class TransactionForm extends StatefulWidget {
   const TransactionForm({super.key});
@@ -134,6 +129,8 @@ class _TransactionFormState extends State<TransactionForm> {
                 }
               },
             ),
+            const SizedBox(height: 8),
+            const FormNumberKeypad(),
             const SizedBox(height: 16),
           ],
         ),
@@ -158,7 +155,7 @@ class _TransactionFormState extends State<TransactionForm> {
       child: Padding(
         padding: const EdgeInsets.only(bottom: 4),
         child: TextField(
-          autofocus: true,
+          // autofocus: true,
           controller: _amountController,
           keyboardType: TextInputType.number,
           decoration: InputDecoration(

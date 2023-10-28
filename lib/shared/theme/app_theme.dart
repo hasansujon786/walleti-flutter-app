@@ -6,6 +6,7 @@ class AppTheme {
   /// Light theme data of the app
   static ThemeData get lightTheme {
     return ThemeData(
+      useMaterial3: true,
       brightness: Brightness.light,
       primaryColor: AppColors.primary,
       colorScheme: const ColorScheme.light(
@@ -26,6 +27,7 @@ class AppTheme {
 
   static ThemeData get darkTheme {
     return ThemeData(
+      useMaterial3: true,
       brightness: Brightness.dark,
       primaryColor: AppColors.primary,
       colorScheme: const ColorScheme.dark(

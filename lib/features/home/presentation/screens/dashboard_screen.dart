@@ -20,7 +20,7 @@ class DashboardScreen extends StatelessWidget {
           toggleTransactioView: onTnxViewToggle,
         ),
         const DbTransactionListView(),
-        const SliverPadding(padding: EdgeInsets.only(bottom: 40))
+        const SliverToBoxAdapter(child: ColoredBox(color: Colors.white, child: SizedBox(height: 60)))
       ],
     );
   }
