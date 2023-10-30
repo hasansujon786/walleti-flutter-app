@@ -39,25 +39,39 @@ class FormNumberKeypad extends StatefulWidget {
 }
 
 class _FormNumberKeypadState extends State<FormNumberKeypad> {
-  String display = '';
+  String display = '0';
   String curDigits = '';
-  double lastResult = 0;
-  String? lastOparatory;
   List<String> inputs = [];
+  String? lastOparatory;
+  double lastResult = 0;
+  List<double> commitResults = [];
 
   void _handleKeyPress(String curInput) async {
-    await _handleKeyInput(curInput);
+    if (curInput == oparatorKeyValues['<']) {
+      _handleBackSpace();
+    } else {
+      _handleKeyInput(curInput);
+    }
+
     printResult();
     setState(() {});
   }
 
   double _calculate(String newDigits, String oparator) {
     lastResult = lastResult + double.parse(newDigits);
+    commitResults.add(lastResult);
     return lastResult;
   }
 
   String _calculateDisplay(String newDigits, String? oparator) {
-    display = (lastResult + double.parse(newDigits)).toString();
+    var newDisplayRes = 0.0;
+    if (newDigits.isEmpty) {
+      newDisplayRes = lastResult;
+    } else {
+      newDisplayRes = (lastResult + double.parse(newDigits));
+    }
+
+    display = newDisplayRes.toString();
     return display;
   }
 
@@ -65,8 +79,7 @@ class _FormNumberKeypadState extends State<FormNumberKeypad> {
     inputs[inputs.length - 1] = newDigits;
   }
 
-
-  Future<void> _handleKeyInput(String curInput) async {
+  void _handleKeyInput(String curInput) {
     final isCurInputOparator = NumKeyUtils.isOparentValue(curInput);
     if (isCurInputOparator) {
       lastOparatory = curInput;
@@ -114,6 +127,35 @@ class _FormNumberKeypadState extends State<FormNumberKeypad> {
     return;
   }
 
+  void _handleBackSpace() {
+    if (inputs.isEmpty) return;
+
+    final islastInputWasOparator = NumKeyUtils.isOparentValue(inputs.last);
+    if (islastInputWasOparator) {
+      // TODO: should rplace with prev last oparrator
+      inputs.removeLast();
+      commitResults.removeLast();
+      if (inputs.isNotEmpty) {
+        curDigits = inputs.last;
+      }
+
+      // reverse oparator with lastResult
+      lastResult = commitResults.isNotEmpty ? commitResults.last : 0;
+      return;
+    }
+
+    if (curDigits == '') {
+    } else if (curDigits.isNotEmpty) {
+      curDigits = curDigits.substring(0, curDigits.length - 1);
+      if (curDigits == '') {
+        inputs.removeLast();
+      } else {
+        _updateLastInput(curDigits);
+      }
+      _calculateDisplay(curDigits, lastOparatory);
+    }
+  }
+
   void printResult() {
     print('==============================');
     print('curDigits: $curDigits');
@@ -125,12 +167,15 @@ class _FormNumberKeypadState extends State<FormNumberKeypad> {
   Widget build(BuildContext context) {
     return Material(
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          Row(children: [
-            Text(inputs.join(' ')),
-            const Text(' = '),
-            Text(display),
-          ]),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Text(inputs.join(' ')),
+              Text(display, style: Theme.of(context).textTheme.titleLarge),
+            ],
+          ),
           GridView.count(
             shrinkWrap: true,
             childAspectRatio: 3 / 2,
