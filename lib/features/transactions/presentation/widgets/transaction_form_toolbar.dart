@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../shared/theme/app_colors.dart';
+import '../../../../shared/theme/app_styles.dart';
 import 'tnx_date_picker.dart';
 
-const btnText = AppColors.darkGreen;
-const btnOutline = AppColors.extraLightGrey;
+const disableColor = AppColors.extraLightGrey;
 
 class TransactionFormToolBar extends StatelessWidget {
   const TransactionFormToolBar({
@@ -27,12 +27,12 @@ class TransactionFormToolBar extends StatelessWidget {
       return Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          ToolIconBtn(icon: Icons.note_add_outlined, onPressed: toggleNote),
+          ToolIconBtn(icon: const Icon(Icons.note_add_outlined), onPressed: toggleNote),
           const SizedBox(width: 4),
           TnxDatePicker(onPick: onSelectNewDate),
           const Spacer(),
           ToolIconBtn(
-            icon: Icons.send,
+            icon: const Icon(Icons.send),
             onPressed: isSaveBtnDisablled ? null : () => onSave(context, ref),
           ),
         ],
@@ -42,34 +42,21 @@ class TransactionFormToolBar extends StatelessWidget {
 }
 
 class ToolBtn extends StatelessWidget {
-  const ToolBtn({
-    super.key,
-    required this.label,
-    required this.icon,
-    required this.onPressed
-  });
+  const ToolBtn({super.key, required this.label, required this.icon, required this.onPressed});
 
-  final String label;
-  final IconData icon;
+  final Widget label;
+  final Widget icon;
   final void Function()? onPressed;
 
   @override
   Widget build(BuildContext context) {
-    // final primaryColor = Theme.of(context).primaryColor;
-    final disableColor = Colors.grey.shade300;
-
-    return TextButton.icon(
-      label: Text(label, style: const TextStyle(color: btnText)),
-      icon: Icon(icon, size: 20, color: btnText),
+    return OutlinedButton.icon(
+      label: label,
+      icon: icon,
       onPressed: onPressed,
       style: ButtonStyle(
-        fixedSize: const MaterialStatePropertyAll(Size.fromHeight(38)),
-        padding: const MaterialStatePropertyAll(EdgeInsets.only(left: 10, right: 12)),
         shape: MaterialStatePropertyAll(
-          RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8.0),
-            side: BorderSide(color: disableColor),
-          ),
+          RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppStyles.roundedXl)),
         ),
       ),
     );
@@ -79,26 +66,28 @@ class ToolBtn extends StatelessWidget {
 class ToolIconBtn extends StatelessWidget {
   const ToolIconBtn({super.key, required this.icon, this.onPressed});
 
-  final IconData icon;
+  final Widget icon;
   final void Function()? onPressed;
 
   @override
   Widget build(BuildContext context) {
     final isDisabled = onPressed == null;
-    return TextButton(
+    final primaryColor = Theme.of(context).primaryColor;
+
+    return IconButton(
       onPressed: onPressed,
+      icon: icon,
       style: ButtonStyle(
-        fixedSize: const MaterialStatePropertyAll(Size.fromHeight(38)),
-        minimumSize: const MaterialStatePropertyAll(Size(44, 38)),
+        iconColor: MaterialStatePropertyAll(isDisabled ? disableColor : primaryColor),
+        overlayColor: MaterialStatePropertyAll(AppColors.primaryLight.withOpacity(0.3)),
+        minimumSize: const MaterialStatePropertyAll(Size(48, 38)),
         shape: MaterialStatePropertyAll(
           RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8.0),
-            side: const BorderSide(color: btnOutline),
+            borderRadius: BorderRadius.circular(AppStyles.roundedXl),
+            side: const BorderSide(color: disableColor),
           ),
         ),
       ),
-      // child: Text('x'),
-      child: Icon(icon, color: isDisabled ? btnOutline : btnText, size: 22),
     );
   }
 }

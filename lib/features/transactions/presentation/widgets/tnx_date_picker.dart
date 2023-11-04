@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../shared/extensions/date_time_extention.dart';
+import 'transaction_form_toolbar.dart';
 
 class TnxDatePicker extends StatefulWidget {
   const TnxDatePicker({
@@ -78,7 +79,7 @@ class _TnxDatePickerState extends State<TnxDatePicker> with RestorationMixin {
 
   @override
   Widget build(BuildContext context) {
-    return OutlinedButton.icon(
+    return ToolBtn(
       icon: const Icon(Icons.today_outlined, size: 22),
       onPressed: () {
         _restorableDatePickerRouteFuture.present();
