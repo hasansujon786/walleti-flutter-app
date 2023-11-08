@@ -10,13 +10,19 @@ class DbTransactionListView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ref) {
-    final tnxs = ref.watch(transactionsProvider);
+    final transactionState = ref.watch(allTransactions);
 
-    return SliverList(
-      delegate: SliverChildBuilderDelegate(
-        (context, index) => TransactionListItem(tnxs[index]),
-        childCount: tnxs.length,
-      ),
+    return transactionState.when(
+      data: (data) {
+        return SliverList(
+          delegate: SliverChildBuilderDelegate(
+            (context, index) => TransactionListItem(data[index]),
+            childCount: data.length,
+          ),
+        );
+      },
+      loading: () => const SliverToBoxAdapter(child: Center(child: Text('loading'))),
+      error: (error, stackTrace) => const SliverToBoxAdapter(child: Center(child: Text('error'))),
     );
   }
 
@@ -29,4 +35,3 @@ class DbTransactionListView extends ConsumerWidget {
     );
   }
 }
-

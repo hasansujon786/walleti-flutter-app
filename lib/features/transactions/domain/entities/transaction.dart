@@ -1,38 +1,13 @@
-class Transaction {
-  Transaction({
-    required this.amount,
-    required this.type,
-    required this.createdAt,
-    this.category,
-    this.note,
-  });
+import 'package:walleti/shared/data/local/database.dart';
 
-  double amount;
-  TransactionType type;
-  String? category;
-  String? note;
-  DateTime createdAt;
-
-  Transaction copyWith({
-    double? amount,
-    String? category,
-    TransactionType? type,
-    DateTime? createdAt,
+class TransactionInput extends TransactionData {
+  TransactionInput({
     String? note,
-  }) {
-    return Transaction(
-      amount: amount ?? this.amount,
-      type: type ?? this.type,
-      category: category ?? this.category,
-      createdAt: createdAt ?? this.createdAt,
-      note: note ?? this.note,
-    );
-  }
-
-  @override
-  String toString() {
-    return 'amount $amount, type $type, category $category, note $note, createdAt $createdAt';
-  }
+    int? category,
+    required double amount,
+    required DateTime createdAt,
+    required TransactionType type,
+  }) : super(id: 0, amount: amount, type: type, createdAt: createdAt, note: note, category: category);
 
   static bool isExpanseType(TransactionType cType) {
     return cType == TransactionType.expance;
@@ -41,9 +16,19 @@ class Transaction {
   static bool isIncomeType(TransactionType cType) {
     return cType == TransactionType.income;
   }
+
+  static TransactionInput as(TransactionData data) {
+    return TransactionInput(
+      amount: data.amount,
+      type: data.type,
+      createdAt: data.createdAt,
+      note: data.note,
+      category: data.category,
+    );
+  }
 }
 
 enum TransactionType {
-  income,
   expance,
+  income,
 }

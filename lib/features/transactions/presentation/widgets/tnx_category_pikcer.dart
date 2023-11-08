@@ -20,7 +20,7 @@ class TnxCategoryPikcer extends StatefulWidget {
 
 class _TnxCategoryPikcerState extends State<TnxCategoryPikcer> {
   late PageController pageController = PageController(
-    initialPage: Transaction.isExpanseType(widget.initialTnxType) ? 0 : 1,
+    initialPage: TransactionInput.isExpanseType(widget.initialTnxType) ? 0 : 1,
   );
 
   void emmitCategoryOnSelect(val) {

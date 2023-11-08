@@ -56,13 +56,15 @@ class _TransactionFormState extends State<TransactionForm> {
   }
 
   void _handleOnSave(BuildContext context, WidgetRef ref) {
-    final tnx = Transaction(
+    final tnx = TransactionInput(
       amount: _inputAmount,
       type: _choosenTransactinType,
-      category: _choosenCategory,
+      // TODO: add category
+      // category: _choosenCategory,
       note: _isNoteInputVisibled && _noteController.text.isNotEmpty ? _noteController.text : null,
       createdAt: _choosenDate,
     );
+
     ref.read(transactionsProvider.notifier).create(tnx);
     Navigator.pop(context);
   }
@@ -156,7 +158,7 @@ class _TransactionFormState extends State<TransactionForm> {
   }
 
   Column _buildCurrentCategory() {
-    final isExpanseType = Transaction.isExpanseType(_choosenTransactinType);
+    final isExpanseType = TransactionInput.isExpanseType(_choosenTransactinType);
     return Column(
       children: [
         TransactionCategoryTile(

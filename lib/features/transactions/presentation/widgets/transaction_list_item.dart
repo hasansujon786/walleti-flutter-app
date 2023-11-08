@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../shared/data/local/database.dart';
 import '../../../../shared/extensions/date_time_extention.dart';
 import '../../../../shared/theme/app_colors.dart';
 import '../../../../shared/utils/utils.dart';
@@ -8,11 +9,11 @@ import '../../domain/entities/transaction.dart';
 class TransactionListItem extends StatelessWidget {
   const TransactionListItem(this.tnx, {super.key});
 
-  final Transaction tnx;
+  final TransactionData tnx;
 
   @override
   Widget build(BuildContext context) {
-    final isExpanse = Transaction.isExpanseType(tnx.type);
+    final isExpanse = TransactionInput.isExpanseType(tnx.type);
 
     return ListTile(
       onTap: () {
@@ -20,7 +21,7 @@ class TransactionListItem extends StatelessWidget {
       },
       title: Row(
         children: [
-          Text(tnx.category ?? 'Unknown'),
+          // Text(tnx.category ? tnx.category : 'Unknown'),
           const SizedBox(width: 8),
           Text(tnx.createdAt.relateiveDate),
         ],

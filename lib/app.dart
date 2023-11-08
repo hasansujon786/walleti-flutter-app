@@ -13,7 +13,7 @@ class App extends ConsumerWidget {
     final appThemeMode = ref.watch(appThemeProvider);
     return MaterialApp(
       title: 'Material App',
-      themeMode: ThemeMode.light,
+      themeMode: appThemeMode,
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       restorationScopeId: 'app',
