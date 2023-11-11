@@ -1,1 +1,1 @@
-export 'tnxs_provider.dart';
+export 'transaction_provider.dart';

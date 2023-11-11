@@ -55,8 +55,8 @@ class _TransactionFormState extends State<TransactionForm> {
     setState(() => _isNoteInputVisibled = !_isNoteInputVisibled);
   }
 
-  void _handleOnSave(BuildContext context, WidgetRef ref) {
-    final tnx = TransactionInput(
+  void _handleOnSave(BuildContext context, WidgetRef ref) async {
+    final tnxInput = TransactionInput(
       amount: _inputAmount,
       type: _choosenTransactinType,
       // TODO: add category
@@ -65,8 +65,9 @@ class _TransactionFormState extends State<TransactionForm> {
       createdAt: _choosenDate,
     );
 
-    ref.read(transactionsProvider.notifier).create(tnx);
-    Navigator.pop(context);
+    ref.read(transactionListProvider.notifier).addTransaction(tnxInput).then((_) {
+      Navigator.pop(context);
+    });
   }
 
   void _handleOnCategorySelect(String value, TransactionType type) {

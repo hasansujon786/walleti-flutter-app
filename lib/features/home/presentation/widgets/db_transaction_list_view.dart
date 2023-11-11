@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../transactions/presentation/providers/tnxs_provider.dart';
+import '../../../transactions/presentation/providers/transaction_provider.dart';
 import '../../../transactions/presentation/widgets/transaction_list_item.dart';
 
 class DbTransactionListView extends ConsumerWidget {
@@ -10,7 +10,9 @@ class DbTransactionListView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ref) {
-    final transactionState = ref.watch(allTransactions);
+    // return const SliverToBoxAdapter(child: Center(child: Text('no item')));
+    // final transactionState = ref.watch(allTransactionsStreamProvider);
+    final transactionState = ref.watch(transactionListProvider);
 
     return transactionState.when(
       data: (data) {
@@ -23,6 +25,8 @@ class DbTransactionListView extends ConsumerWidget {
       },
       loading: () => const SliverToBoxAdapter(child: Center(child: Text('loading'))),
       error: (error, stackTrace) => const SliverToBoxAdapter(child: Center(child: Text('error'))),
+      // skipLoadingOnReload: true,
+      // skipLoadingOnRefresh: true,
     );
   }
 

@@ -3,11 +3,12 @@ import 'dart:ui';
 
 import 'package:drift/drift.dart';
 import 'package:drift/native.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../features/transactions/data/models/transaction_model.dart';
+import '../../../features/transactions/domain/entities/transaction.dart';
 
 part 'database.g.dart';
 
@@ -18,12 +19,15 @@ class AppDatabase extends _$AppDatabase {
   @override
   int get schemaVersion => 1;
 
-  static final StateProvider<AppDatabase> provider = StateProvider((ref) {
-    final database = AppDatabase();
-    ref.onDispose(database.close);
+  static final Provider<AppDatabase> provider = appDatabaseProvider;
+}
 
-    return database;
-  });
+/// db provider name: [appDatabaseProvider]
+@Riverpod(keepAlive: true)
+AppDatabase appDatabase(AppDatabaseRef ref) {
+  final database = AppDatabase();
+  ref.onDispose(database.close);
+  return database;
 }
 
 LazyDatabase _openConnection() {
