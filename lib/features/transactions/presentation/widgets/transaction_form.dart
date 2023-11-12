@@ -34,7 +34,7 @@ class _TransactionFormState extends State<TransactionForm> {
   // transaction input value
   double _inputAmount = 0;
   late TextEditingController _noteController;
-  var _choosenTransactinType = TransactionType.expance;
+  var _choosenTransactinType = TransactionType.expense;
   var _choosenDate = DateTime.now();
   String? _choosenCategory;
   var _inputAmountExpression = '';
@@ -159,7 +159,7 @@ class _TransactionFormState extends State<TransactionForm> {
   }
 
   Column _buildCurrentCategory() {
-    final isExpanseType = TransactionInput.isExpanseType(_choosenTransactinType);
+    final isExpenseType = _choosenTransactinType.isExpenseType();
     return Column(
       children: [
         TransactionCategoryTile(
@@ -168,11 +168,11 @@ class _TransactionFormState extends State<TransactionForm> {
         ),
         const SizedBox(height: 4),
         Text(
-          isExpanseType ? 'Expanse' : 'Income',
+          isExpenseType ? 'Expense' : 'Income',
           style: TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.w600,
-            color: isExpanseType ? AppColors.expanse : AppColors.income,
+            color: isExpenseType ? AppColors.expense : AppColors.income,
           ),
         )
       ],

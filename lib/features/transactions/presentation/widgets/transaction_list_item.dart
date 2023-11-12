@@ -13,7 +13,7 @@ class TransactionListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isExpanse = TransactionInput.isExpanseType(tnx.type);
+    final isExpense = tnx.type.isExpenseType();
 
     return ListTile(
       onTap: () {
@@ -29,8 +29,8 @@ class TransactionListItem extends StatelessWidget {
       trailing: Text.rich(
         TextSpan(
           children: [
-            if (isExpanse) const TextSpan(text: '-'),
-            if (!isExpanse)
+            if (isExpense) const TextSpan(text: '-'),
+            if (!isExpense)
               const WidgetSpan(
                 child: Text('+', style: TextStyle(fontSize: 12, color: AppColors.income, fontWeight: FontWeight.w600)),
                 alignment: PlaceholderAlignment.middle,
@@ -40,7 +40,7 @@ class TransactionListItem extends StatelessWidget {
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w600,
-            color: isExpanse ? AppColors.expanse : AppColors.income,
+            color: isExpense ? AppColors.expense : AppColors.income,
           ),
         ),
       ),

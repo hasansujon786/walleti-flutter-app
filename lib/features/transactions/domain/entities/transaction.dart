@@ -9,14 +9,6 @@ class TransactionInput extends TransactionData {
     required TransactionType type,
   }) : super(id: 0, amount: amount, type: type, createdAt: createdAt, note: note, category: category);
 
-  static bool isExpanseType(TransactionType cType) {
-    return cType == TransactionType.expance;
-  }
-
-  static bool isIncomeType(TransactionType cType) {
-    return cType == TransactionType.income;
-  }
-
   static TransactionInput as(TransactionData data) {
     return TransactionInput(
       amount: data.amount,
@@ -29,6 +21,17 @@ class TransactionInput extends TransactionData {
 }
 
 enum TransactionType {
-  expance,
+  expense,
   income,
+  unknown,
+}
+
+extension TransactionTypeUtils on TransactionType {
+  bool isExpenseType() {
+    return this == TransactionType.expense;
+  }
+
+  bool isIncomeType() {
+    return this == TransactionType.income;
+  }
 }

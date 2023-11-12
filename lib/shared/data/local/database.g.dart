@@ -563,9 +563,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
 
 String _$appDatabaseHash() => r'8ab73ef1293e27f6de024928c2e888eefcb35e1d';
 
-/// db provider name: [appDatabaseProvider]
-///
-/// Copied from [appDatabase].
+/// See also [appDatabase].
 @ProviderFor(appDatabase)
 final appDatabaseProvider = Provider<AppDatabase>.internal(
   appDatabase,

@@ -48,7 +48,7 @@ class _TransactionTypeSwitchState extends State<TransactionTypeSwitch> {
           ),
           Row(
             children: [
-              buildSwitch('Expanse', curPage < 1),
+              buildSwitch('Expense', curPage < 1),
               buildSwitch('Income', curPage > 0),
             ],
           ),

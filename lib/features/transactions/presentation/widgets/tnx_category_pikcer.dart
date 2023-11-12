@@ -20,16 +20,16 @@ class TnxCategoryPikcer extends StatefulWidget {
 
 class _TnxCategoryPikcerState extends State<TnxCategoryPikcer> {
   late PageController pageController = PageController(
-    initialPage: TransactionInput.isExpanseType(widget.initialTnxType) ? 0 : 1,
+    initialPage: widget.initialTnxType.isExpenseType() ? 0 : 1,
   );
 
-  void emmitCategoryOnSelect(val) {
-    var type = TransactionType.expance;
+  void emmitCategoryOnSelect(String category) {
+    var type = TransactionType.expense;
     if (pageController.page == 1) {
       type = TransactionType.income;
     }
 
-    widget.onSelect?.call(val, type);
+    widget.onSelect?.call(category, type);
   }
 
   @override

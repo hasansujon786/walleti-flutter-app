@@ -22,7 +22,6 @@ class AppDatabase extends _$AppDatabase {
   static final Provider<AppDatabase> provider = appDatabaseProvider;
 }
 
-/// db provider name: [appDatabaseProvider]
 @Riverpod(keepAlive: true)
 AppDatabase appDatabase(AppDatabaseRef ref) {
   final database = AppDatabase();

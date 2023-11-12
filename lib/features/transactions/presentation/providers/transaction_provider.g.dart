@@ -9,9 +9,7 @@ part of 'transaction_provider.dart';
 String _$allTransactionsStreamHash() =>
     r'f3835a48b2e2cbeacb72dad20fbf7e175bbfd89e';
 
-/// See also [allTransactionsStreamProvider]
-///
-/// Copied from [allTransactionsStream].
+/// See also [allTransactionsStream].
 @ProviderFor(allTransactionsStream)
 final allTransactionsStreamProvider =
     StreamProvider<List<TransactionData>>.internal(
@@ -25,11 +23,9 @@ final allTransactionsStreamProvider =
 );
 
 typedef AllTransactionsStreamRef = StreamProviderRef<List<TransactionData>>;
-String _$transactionListHash() => r'f5e3746d416f2817c4c8a968627a3eda5231dff7';
+String _$transactionListHash() => r'107595190bb527a0871aecd9e3c044a39102084b';
 
-/// See also [transactionListProvider].
-///
-/// Copied from [TransactionList].
+/// See also [TransactionList].
 @ProviderFor(TransactionList)
 final transactionListProvider =
     AsyncNotifierProvider<TransactionList, List<TransactionData>>.internal(

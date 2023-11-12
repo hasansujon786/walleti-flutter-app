@@ -20,5 +20,5 @@ class AppColors {
   static const Color extraLightGrey = Color(0xffE1E8ED);
 
   static const Color income = Color(0xFF43A047);
-  static const Color expanse = Color(0xFFE53935);
+  static const Color expense = Color(0xFFE53935);
 }

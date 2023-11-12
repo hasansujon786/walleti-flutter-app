@@ -26,12 +26,11 @@ class TransactionsTypeConverter extends TypeConverter<TransactionType, String> {
 
   @override
   TransactionType fromSql(String fromDb) {
-    TransactionType.values.map((e) {
-      if (e.name == fromDb) {
-        return e;
-      }
-    });
-    return TransactionType.income;
+    try {
+      return TransactionType.values.byName(fromDb);
+    } catch (e) {
+      return TransactionType.unknown;
+    }
   }
 
   @override

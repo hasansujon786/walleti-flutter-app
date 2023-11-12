@@ -5,7 +5,6 @@ import '../../../../shared/data/local/database.dart';
 
 part 'transaction_provider.g.dart';
 
-/// See also [transactionListProvider].
 @Riverpod(keepAlive: true)
 class TransactionList extends _$TransactionList {
   late final AppDatabase _db = ref.read(appDatabaseProvider);
@@ -33,7 +32,6 @@ class TransactionList extends _$TransactionList {
   }
 }
 
-/// See also [allTransactionsStreamProvider]
 @Riverpod(keepAlive: true)
 Stream<List<TransactionData>> allTransactionsStream(AllTransactionsStreamRef ref) {
   final db = ref.watch(appDatabaseProvider);
