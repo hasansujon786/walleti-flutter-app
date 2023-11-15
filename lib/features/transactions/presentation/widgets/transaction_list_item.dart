@@ -7,18 +7,17 @@ import '../../../../shared/utils/utils.dart';
 import '../../domain/entities/transaction.dart';
 
 class TransactionListItem extends StatelessWidget {
-  const TransactionListItem(this.tnx, {super.key});
+  const TransactionListItem(this.tnx, {super.key, required this.onTap});
 
   final TransactionData tnx;
+  final void Function() onTap;
 
   @override
   Widget build(BuildContext context) {
     final isExpense = tnx.type.isExpenseType();
 
     return ListTile(
-      onTap: () {
-        print('asdf');
-      },
+      onTap: onTap,
       title: Row(
         children: [
           // Text(tnx.category ? tnx.category : 'Unknown'),

@@ -18,8 +18,6 @@ class AppDatabase extends _$AppDatabase {
 
   @override
   int get schemaVersion => 1;
-
-  static final Provider<AppDatabase> provider = appDatabaseProvider;
 }
 
 @Riverpod(keepAlive: true)

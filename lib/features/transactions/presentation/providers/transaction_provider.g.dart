@@ -23,7 +23,7 @@ final allTransactionsStreamProvider =
 );
 
 typedef AllTransactionsStreamRef = StreamProviderRef<List<TransactionData>>;
-String _$transactionListHash() => r'107595190bb527a0871aecd9e3c044a39102084b';
+String _$transactionListHash() => r'ebb031546c5779c5c85f2b1b85f48032dd69cd12';
 
 /// See also [TransactionList].
 @ProviderFor(TransactionList)

@@ -18,7 +18,13 @@ class DbTransactionListView extends ConsumerWidget {
       data: (data) {
         return SliverList(
           delegate: SliverChildBuilderDelegate(
-            (context, index) => TransactionListItem(data[index]),
+            (context, index) => TransactionListItem(
+              data[index],
+              onTap: () {
+                ref.read(transactionListProvider.notifier).deleteTransaction(data[index]);
+                // ref.read(transactionListProvider.notifier).updateTransaction(data[index].copyWith(amount: 100));
+              },
+            ),
             childCount: data.length,
           ),
         );
