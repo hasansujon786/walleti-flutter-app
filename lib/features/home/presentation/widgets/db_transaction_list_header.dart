@@ -6,11 +6,11 @@ class DbTtransactionListHeader extends ConsumerWidget {
   final void Function(bool) toggleTransactioView;
   final Color bg;
   const DbTtransactionListHeader({
-    Key? key,
+    super.key,
     this.isTransactionsView = true,
     required this.toggleTransactioView,
     required this.bg,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context, ref) {
@@ -32,7 +32,7 @@ class DbTtransactionListHeader extends ConsumerWidget {
               ),
               child: Row(
                 children: <Widget>[
-                  Text('Transactions History', style: Theme.of(context).textTheme.subtitle2),
+                  Text('Transactions History', style: Theme.of(context).textTheme.titleSmall),
                   const Spacer(),
                   // CircularButton(
                   //   icon: Icon(isTransactionsView ? Icons.list_alt : Icons.list),

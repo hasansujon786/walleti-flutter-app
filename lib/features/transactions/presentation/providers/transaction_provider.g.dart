@@ -6,24 +6,7 @@ part of 'transaction_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$allTransactionsStreamHash() =>
-    r'f3835a48b2e2cbeacb72dad20fbf7e175bbfd89e';
-
-/// See also [allTransactionsStream].
-@ProviderFor(allTransactionsStream)
-final allTransactionsStreamProvider =
-    StreamProvider<List<TransactionData>>.internal(
-  allTransactionsStream,
-  name: r'allTransactionsStreamProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$allTransactionsStreamHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-typedef AllTransactionsStreamRef = StreamProviderRef<List<TransactionData>>;
-String _$transactionListHash() => r'0dc38d0f941336d75e73ab6256f6472bdb754007';
+String _$transactionListHash() => r'538a31bd6e473082f8fec75d5ee8f259971cedda';
 
 /// See also [TransactionList].
 @ProviderFor(TransactionList)

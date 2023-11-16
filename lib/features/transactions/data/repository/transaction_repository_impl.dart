@@ -1,8 +1,10 @@
 import 'package:drift/drift.dart';
+import 'package:injectable/injectable.dart';
 
 import '../../../../shared/data/local/database.dart';
 import '../../domain/repository/transaction_repository.dart';
 
+@Injectable(as: TransactionRepository)
 class TransactionRepositoryImpl implements TransactionRepository {
   final AppDatabase _db;
   const TransactionRepositoryImpl(this._db);

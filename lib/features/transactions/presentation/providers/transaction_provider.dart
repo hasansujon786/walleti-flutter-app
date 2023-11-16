@@ -1,15 +1,14 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:walleti/features/transactions/data/repository/transaction_repository_impl.dart';
-import 'package:walleti/features/transactions/domain/repository/transaction_repository.dart';
 
+import '../../../../configs/injections.dart';
 import '../../../../shared/data/local/database.dart';
+import '../../domain/repository/transaction_repository.dart';
 
 part 'transaction_provider.g.dart';
 
 @Riverpod(keepAlive: true)
 class TransactionList extends _$TransactionList {
-  late final AppDatabase _db = ref.read(appDatabaseProvider);
-  late final TransactionRepository _repositoy = TransactionRepositoryImpl(_db);
+  final _repositoy = getIt<TransactionRepository>();
 
   @override
   Future<List<TransactionData>> build() async {
@@ -43,8 +42,8 @@ class TransactionList extends _$TransactionList {
   }
 }
 
-@Riverpod(keepAlive: true)
-Stream<List<TransactionData>> allTransactionsStream(AllTransactionsStreamRef ref) {
-  final db = ref.watch(appDatabaseProvider);
-  return db.select(db.transactionEntries).watch();
-}
+// @Riverpod(keepAlive: true)
+// Stream<List<TransactionData>> allTransactionsStream(AllTransactionsStreamRef ref) {
+//   final db = ref.watch(appDatabaseProvider);
+//   return db.select(db.transactionEntries).watch();
+// }

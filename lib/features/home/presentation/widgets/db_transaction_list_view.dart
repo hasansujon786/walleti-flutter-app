@@ -6,7 +6,7 @@ import '../../../transactions/presentation/widgets/transaction_list_item.dart';
 
 class DbTransactionListView extends ConsumerWidget {
   final bool isTransactionsView;
-  const DbTransactionListView({Key? key, this.isTransactionsView = true}) : super(key: key);
+  const DbTransactionListView({super.key, this.isTransactionsView = true});
 
   @override
   Widget build(BuildContext context, ref) {
