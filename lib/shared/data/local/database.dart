@@ -9,6 +9,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../features/transactions/data/models/transaction_model.dart';
 import '../../../features/transactions/domain/entities/transaction.dart';
+import './database_util.dart';
 
 part 'database.g.dart';
 
