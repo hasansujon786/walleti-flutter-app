@@ -22,3 +22,12 @@ class AppColors {
   static const Color income = Color(0xFF43A047);
   static const Color expense = Color(0xFFE53935);
 }
+
+int hexColor(String color) {
+  //adding prefix
+  String newColor = '0xff$color';
+  //removing # sign
+  newColor = newColor.replaceAll('#', '');
+  //converting it to the integer
+  return int.parse(newColor);
+}
